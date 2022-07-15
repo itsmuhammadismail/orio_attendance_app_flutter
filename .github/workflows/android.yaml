@@ -13,9 +13,6 @@ jobs:
     - uses: actions/setup-java@v1
       with:
         java-version: '12.x'
-    - uses: actions/setup-node@v3
-      with:
-        node-version: 16
     - uses: subosito/flutter-action@v2
       with:
           channel: 'stable'
@@ -37,5 +34,6 @@ jobs:
       with:
         appId: ${{secrets.FIREBASE_APP_ID}}
         token: ${{secrets.FIREBASE_TOKEN}}
+        node-version: 16
         groups: testers
         file: app/build/outputs/apk/release/app-release-unsigned.apk
