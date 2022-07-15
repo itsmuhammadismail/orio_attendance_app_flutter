@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:orio_attendance_app_flutter/features/user/presentation/screens/splash/splash_screen.dart';
+import 'package:orio_attendance_app_flutter/features/user/presentation/screens/Splash/splash_screen.dart';
 import 'package:orio_attendance_app_flutter/shared/routes/routes.dart';
 import 'package:orio_attendance_app_flutter/shared/theme/theme_data.dart';
 

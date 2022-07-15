@@ -5,7 +5,7 @@ import 'package:orio_attendance_app_flutter/features/notification/presentation/s
 import 'package:orio_attendance_app_flutter/features/user/presentation/screens/Home/home_screen.dart';
 import 'package:orio_attendance_app_flutter/features/user/presentation/screens/Login/login_screen.dart';
 import 'package:orio_attendance_app_flutter/features/user/presentation/screens/Otp/otp_screen.dart';
-import 'package:orio_attendance_app_flutter/features/user/presentation/screens/splash/splash_screen.dart';
+import 'package:orio_attendance_app_flutter/features/user/presentation/screens/Splash/splash_screen.dart';
 
 class Routes {
   static Map<String, Widget Function(BuildContext)> routes = {
