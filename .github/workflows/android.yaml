@@ -5,9 +5,8 @@ on:
     - master
 
 jobs:
-
   build:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - uses: actions/checkout@v3
     - uses: actions/setup-node@v3
@@ -20,6 +19,10 @@ jobs:
     - uses: subosito/flutter-action@v2
       with:
           channel: 'stable'
+
+    - name: Adding host to env file
+      env:
+        HOST: ${{ secrets.HOST }}
     
    # Get flutter dependencies.
     - run: flutter pub get
@@ -38,5 +41,5 @@ jobs:
       with:
         appId: ${{secrets.FIREBASE_APP_ID}}
         token: ${{secrets.FIREBASE_TOKEN}}
-        groups: testers
+        groups: android_users
         file: app/build/outputs/apk/release/app-release-unsigned.apk
