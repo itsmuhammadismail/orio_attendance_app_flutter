@@ -17,7 +17,7 @@ class NotificationTile extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: const [
           Text(
-            'New Recipe Alert!',
+            'New Notification Alert!',
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
           SizedBox(height: 10),

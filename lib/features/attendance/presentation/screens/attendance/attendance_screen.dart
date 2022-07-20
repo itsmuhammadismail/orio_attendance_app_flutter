@@ -11,7 +11,7 @@ class AttendanceScreen extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    void _determinePosition() async {
+    Future<Position?> _determinePosition() async {
       LocationPermission permission;
       permission = await Geolocator.checkPermission();
 
@@ -25,6 +25,10 @@ class AttendanceScreen extends HookWidget {
       if (permission == LocationPermission.deniedForever) {
         return null;
       }
+
+      return await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high,
+      );
     }
 
     useEffect(() {

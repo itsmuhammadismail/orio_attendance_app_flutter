@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:orio_attendance_app_flutter/features/user/presentation/cubit/user_cubit.dart';
 import 'package:orio_attendance_app_flutter/features/user/presentation/screens/Login/login_screen.dart';
 import 'package:orio_attendance_app_flutter/resources/colors.dart';
 import 'package:orio_attendance_app_flutter/resources/constants.dart';
 import 'package:orio_attendance_app_flutter/shared/routes/navigate.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BuildAppBar extends StatelessWidget with PreferredSizeWidget {
   const BuildAppBar({
@@ -20,8 +23,8 @@ class BuildAppBar extends StatelessWidget with PreferredSizeWidget {
     }
 
     void onLogout() async {
-      // BlocProvider.of<UserCubit>(context).logout();
-      // await HydratedBlocOverrides.current?.storage.clear();
+      context.read<UserCubit>().logout();
+      await HydratedBlocOverrides.current?.storage.clear();
       onSuccess.call();
     }
 

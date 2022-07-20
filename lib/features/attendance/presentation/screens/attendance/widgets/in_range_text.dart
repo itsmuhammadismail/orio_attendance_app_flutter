@@ -4,11 +4,12 @@ import 'package:orio_attendance_app_flutter/resources/colors.dart';
 import 'package:orio_attendance_app_flutter/shared/widgets/text.dart';
 
 class InRangeText extends StatelessWidget {
-  const InRangeText({Key? key}) : super(key: key);
+  final bool isInRange;
+
+  const InRangeText({super.key, required this.isInRange});
 
   @override
   Widget build(BuildContext context) {
-    bool isInRange = true;
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,

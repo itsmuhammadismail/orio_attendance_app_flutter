@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:orio_attendance_app_flutter/features/attendance/presentation/cubits/attendance_data/attendance_data_cubit.dart';
+import 'package:orio_attendance_app_flutter/features/user/presentation/cubit/user_cubit.dart';
 import 'package:orio_attendance_app_flutter/resources/colors.dart';
 import 'package:orio_attendance_app_flutter/resources/constants.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MonthListView extends HookWidget {
   const MonthListView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    DateTime selectedYear = DateTime.now();
     final totalMonthThisYear = useState(1);
+    String token = context.read<UserCubit>().state.user.token;
     final selectedMonth =
         useState(kCompleteMonthNames[DateTime.now().month - 1]);
     late ItemScrollController controller = ItemScrollController();
-
-    void changeSelectedMonth(int monthNo, String month) async {
-      selectedMonth.value = month;
-    }
 
     void changeController() {
       for (int i = 0; i < kCompleteMonthNames.length; i++) {
@@ -38,6 +39,19 @@ class MonthListView extends HookWidget {
       });
       return null;
     }, []);
+
+    Future getData(int monthNo, String token) async {
+      String attendanceDate = monthNo < 10
+          ? '${selectedYear.year}-0$monthNo'
+          : '${selectedYear.year}-$monthNo';
+
+      await context.read<AttendanceDataCubit>().get(token, attendanceDate);
+    }
+
+    void changeSelectedMonth(int monthNo, String month) async {
+      selectedMonth.value = month;
+      await getData(monthNo, token);
+    }
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 15),

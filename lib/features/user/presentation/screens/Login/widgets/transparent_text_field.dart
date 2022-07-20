@@ -42,6 +42,7 @@ class _TransparentTextFieldState extends State<TransparentTextField> {
       autovalidateMode: AutovalidateMode.onUserInteraction,
       onChanged: (String value) => widget.onChange(value),
       keyboardType: widget.keyboardType,
+      style: const TextStyle(color: Colors.white),
       decoration: InputDecoration(
         filled: true,
         fillColor: Colors.white.withOpacity(0.4),
