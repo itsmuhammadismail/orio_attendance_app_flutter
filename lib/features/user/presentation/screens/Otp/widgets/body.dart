@@ -1,25 +1,14 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:orio_attendance_app_flutter/features/attendance/presentation/cubits/station/station_cubit.dart';
-import 'package:orio_attendance_app_flutter/features/user/presentation/cubit/user_cubit.dart';
-import 'package:orio_attendance_app_flutter/features/user/presentation/screens/Home/home_screen.dart';
-import 'package:orio_attendance_app_flutter/features/user/presentation/screens/Otp/widgets/text_field_box.dart';
-import 'package:orio_attendance_app_flutter/shared/routes/navigate.dart';
-import 'package:orio_attendance_app_flutter/shared/widgets/alert.dart';
-import 'package:orio_attendance_app_flutter/shared/widgets/button.dart';
-import 'package:orio_attendance_app_flutter/shared/widgets/text.dart';
+part of '../otp_screen.dart';
 
 class Body extends HookWidget {
   Body({Key? key}) : super(key: key);
 
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  final digit1Controller = TextEditingController();
-  final digit2Controller = TextEditingController();
-  final digit3Controller = TextEditingController();
-  final digit4Controller = TextEditingController();
+  final _digit1Controller = TextEditingController();
+  final _digit2Controller = TextEditingController();
+  final _digit3Controller = TextEditingController();
+  final _digit4Controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -39,23 +28,23 @@ class Body extends HookWidget {
     void onSuccess() => Navigate.next(context, HomeScreen.id);
 
     void onSubmit(VoidCallback onSuccess) async {
-      final form = formKey.currentState;
+      final form = _formKey.currentState;
       if (form!.validate()) {
         FocusManager.instance.primaryFocus?.unfocus();
-        if (digit1Controller.text != '' ||
-            digit2Controller.text != '' ||
-            digit3Controller.text != '' ||
-            digit4Controller.text != '') {
+        if (_digit1Controller.text != '' ||
+            _digit2Controller.text != '' ||
+            _digit3Controller.text != '' ||
+            _digit4Controller.text != '') {
           String otp =
-              '${digit1Controller.text}${digit2Controller.text}${digit3Controller.text}${digit4Controller.text}';
+              '${_digit1Controller.text}${_digit2Controller.text}${_digit3Controller.text}${_digit4Controller.text}';
           if (otp == BlocProvider.of<UserCubit>(context).state.user.otp) {
             context.read<UserCubit>().verifyOtp();
             onSuccess.call();
           } else {
-            digit1Controller.clear();
-            digit2Controller.clear();
-            digit3Controller.clear();
-            digit4Controller.clear();
+            _digit1Controller.clear();
+            _digit2Controller.clear();
+            _digit3Controller.clear();
+            _digit4Controller.clear();
 
             showDialog(
               context: context,
@@ -80,7 +69,7 @@ class Body extends HookWidget {
             margin: EdgeInsets.only(top: size.height * 0.1),
             height: size.height * 0.8,
             child: Form(
-              key: formKey,
+              key: _formKey,
               child: Column(
                 children: [
                   SvgPicture.asset('assets/icons/otp.svg'),
@@ -91,7 +80,7 @@ class Body extends HookWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       TextFieldBox(
-                        controller: digit1Controller,
+                        controller: _digit1Controller,
                         autofocus: true,
                         onChange: (value) {
                           if (value.length == 1) {
@@ -101,7 +90,7 @@ class Body extends HookWidget {
                       ),
                       const SizedBox(width: 10),
                       TextFieldBox(
-                        controller: digit2Controller,
+                        controller: _digit2Controller,
                         onChange: (value) {
                           if (value.length == 1) {
                             FocusScope.of(context).nextFocus();
@@ -110,7 +99,7 @@ class Body extends HookWidget {
                       ),
                       const SizedBox(width: 10),
                       TextFieldBox(
-                        controller: digit3Controller,
+                        controller: _digit3Controller,
                         onChange: (value) {
                           if (value.length == 1) {
                             FocusScope.of(context).nextFocus();
@@ -119,7 +108,7 @@ class Body extends HookWidget {
                       ),
                       const SizedBox(width: 10),
                       TextFieldBox(
-                        controller: digit4Controller,
+                        controller: _digit4Controller,
                         onChange: (value) {
                           if (value.length == 1) {
                             FocusScope.of(context).nextFocus();

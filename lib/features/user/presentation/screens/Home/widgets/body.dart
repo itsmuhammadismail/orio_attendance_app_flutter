@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:orio_attendance_app_flutter/features/user/presentation/screens/Home/widgets/card.dart';
-import 'package:orio_attendance_app_flutter/features/user/presentation/screens/Home/widgets/hi.dart';
+part of '../home_screen.dart';
 
 class Body extends StatelessWidget {
   const Body({Key? key}) : super(key: key);

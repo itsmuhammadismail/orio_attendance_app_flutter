@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:orio_attendance_app_flutter/features/notification/presentation/screen/widgets/notification_tile.dart';
-import 'package:orio_attendance_app_flutter/shared/widgets/text.dart';
+part of '../notification_screen.dart';
 
 class Body extends StatelessWidget {
   const Body({Key? key}) : super(key: key);

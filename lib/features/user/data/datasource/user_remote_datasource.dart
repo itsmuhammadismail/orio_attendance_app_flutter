@@ -8,7 +8,7 @@ class UserRemoteDataSource {
 
     Map<String, dynamic> data = {
       "user_name": empId,
-      "application_tag": "BLX-ERP-MOB",
+      "application_tag": "ORIO-ATT-APP",
       "device_id": deviceId.toString(),
     };
 

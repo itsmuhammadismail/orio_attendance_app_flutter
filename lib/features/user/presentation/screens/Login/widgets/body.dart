@@ -1,12 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:orio_attendance_app_flutter/features/user/presentation/cubit/user_cubit.dart';
-import 'package:orio_attendance_app_flutter/features/user/presentation/screens/Login/widgets/transparent_text_field.dart';
-import 'package:orio_attendance_app_flutter/features/user/presentation/screens/Otp/otp_screen.dart';
-import 'package:orio_attendance_app_flutter/shared/routes/navigate.dart';
-import 'package:orio_attendance_app_flutter/shared/widgets/alert.dart';
-import 'package:orio_attendance_app_flutter/shared/widgets/button.dart';
-import 'package:orio_attendance_app_flutter/shared/widgets/text_field_container.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+part of '../login_screen.dart';
 
 class Body extends StatefulWidget {
   const Body({Key? key}) : super(key: key);
@@ -16,20 +8,21 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
-  final idController = TextEditingController();
-  GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final _idController = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  void onSuccess() => Navigate.to(context, OtpScreen.id);
+  void _onSuccess() => Navigate.to(context, OtpScreen.id);
 
-  void onSubmit(VoidCallback onSuccess) async {
-    final form = formKey.currentState;
+  void _onSubmit(VoidCallback onSuccess) async {
+    final form = _formKey.currentState;
+    UserStatus status = context.read<UserCubit>().state.status;
 
     if (form!.validate()) {
       FocusManager.instance.primaryFocus?.unfocus();
-      if (idController.text != '') {
-        await context.read<UserCubit>().login(idController.text);
-        if (context.read<UserCubit>().state.status == UserStatus.error) {
-          idController.clear();
+      if (_idController.text != '') {
+        await context.read<UserCubit>().login(_idController.text);
+        if (status == UserStatus.error) {
+          _idController.clear();
           showDialog(
             context: context,
             builder: (BuildContext context) {
@@ -58,7 +51,7 @@ class _BodyState extends State<Body> {
         ),
       ),
       child: Form(
-        key: formKey,
+        key: _formKey,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -81,7 +74,7 @@ class _BodyState extends State<Body> {
             const SizedBox(height: 44),
             TextFieldContainer(
               child: TransparentTextField(
-                controller: idController,
+                controller: _idController,
                 hintText: 'Employee ID',
                 keyboardType: TextInputType.number,
                 onChange: (value) {},
@@ -95,7 +88,7 @@ class _BodyState extends State<Body> {
                           color: Colors.white,
                         )
                       : const Text('Login', style: TextStyle(fontSize: 18)),
-              onPressed: () => onSubmit(onSuccess),
+              onPressed: () => _onSubmit(_onSuccess),
             ),
           ],
         ),

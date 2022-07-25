@@ -26,7 +26,7 @@ class TransparentTextField extends StatefulWidget {
 
 class _TransparentTextFieldState extends State<TransparentTextField> {
   bool show = true;
-  OutlineInputBorder border = OutlineInputBorder(
+  final OutlineInputBorder _border = OutlineInputBorder(
     borderRadius: BorderRadius.circular(12),
     borderSide: const BorderSide(
       color: Colors.transparent,
@@ -50,10 +50,10 @@ class _TransparentTextFieldState extends State<TransparentTextField> {
         hintStyle: const TextStyle(
           color: Colors.white,
         ),
-        border: border,
-        enabledBorder: border,
-        disabledBorder: border,
-        focusedBorder: border,
+        border: _border,
+        enabledBorder: _border,
+        disabledBorder: _border,
+        focusedBorder: _border,
       ),
       validator: widget.required
           ? (value) {

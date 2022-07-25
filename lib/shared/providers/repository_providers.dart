@@ -7,6 +7,7 @@ import 'package:orio_attendance_app_flutter/features/attendance/domain/repositor
 import 'package:orio_attendance_app_flutter/features/attendance/domain/repository/station_repository_impl.dart';
 import 'package:orio_attendance_app_flutter/features/attendance/domain/usecase/attendance_data_usecase.dart';
 import 'package:orio_attendance_app_flutter/features/attendance/domain/usecase/station_usecase.dart';
+import 'package:orio_attendance_app_flutter/features/attendance/domain/usecase/today_attendance_usecase.dart';
 import 'package:orio_attendance_app_flutter/features/user/data/datasource/user_remote_datasource.dart';
 import 'package:orio_attendance_app_flutter/features/user/data/mapper/user_mapper.dart';
 import 'package:orio_attendance_app_flutter/features/user/domain/repository/user_repository_impl.dart';
@@ -33,6 +34,13 @@ class RepositoryProviders {
     // Attendance Data
     RepositoryProvider<AttendanceDataUseCase>(
       create: (context) => AttendanceDataUseCase(
+        repository: AttendanceDataRepositoryImpl(
+            attendanceDataMapper: AttendanceDataMapper(),
+            attendanceDataRemoteDataSource: AttendanceDataRemoteDataSource()),
+      ),
+    ),
+    RepositoryProvider<TodayAttendanceUseCase>(
+      create: (context) => TodayAttendanceUseCase(
         repository: AttendanceDataRepositoryImpl(
             attendanceDataMapper: AttendanceDataMapper(),
             attendanceDataRemoteDataSource: AttendanceDataRemoteDataSource()),

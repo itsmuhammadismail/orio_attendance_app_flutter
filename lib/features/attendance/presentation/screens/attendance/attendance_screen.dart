@@ -1,8 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:orio_attendance_app_flutter/features/attendance/presentation/screens/attendance/widgets/body.dart';
 import 'package:orio_attendance_app_flutter/shared/layout/layout.dart';
+import 'dart:async';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:orio_attendance_app_flutter/features/attendance/domain/entity/station_entitiy.dart';
+import 'package:orio_attendance_app_flutter/features/attendance/presentation/cubits/station/station_cubit.dart';
+import 'package:orio_attendance_app_flutter/features/attendance/presentation/screens/attendance/widgets/attendance_button.dart';
+import 'package:orio_attendance_app_flutter/features/attendance/presentation/screens/attendance/widgets/attendance_info.dart';
+import 'package:orio_attendance_app_flutter/features/attendance/presentation/screens/attendance/widgets/date_time.dart';
+import 'package:orio_attendance_app_flutter/features/attendance/presentation/screens/attendance/widgets/in_range_text.dart';
+import 'package:orio_attendance_app_flutter/features/attendance/presentation/screens/attendance_data/attendance_data_screen.dart';
+import 'package:orio_attendance_app_flutter/resources/constants.dart';
+import 'package:orio_attendance_app_flutter/shared/route_aware/route_aware.dart';
+import 'package:orio_attendance_app_flutter/shared/routes/navigate.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+part 'widgets/body.dart';
 
 class AttendanceScreen extends HookWidget {
   const AttendanceScreen({Key? key}) : super(key: key);
@@ -11,7 +25,7 @@ class AttendanceScreen extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    Future<Position?> _determinePosition() async {
+    Future _determinePosition() async {
       LocationPermission permission;
       permission = await Geolocator.checkPermission();
 
@@ -25,10 +39,6 @@ class AttendanceScreen extends HookWidget {
       if (permission == LocationPermission.deniedForever) {
         return null;
       }
-
-      return await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high,
-      );
     }
 
     useEffect(() {

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:orio_attendance_app_flutter/features/user/presentation/cubit/user_cubit.dart';
 import 'package:orio_attendance_app_flutter/resources/colors.dart';
 import 'package:orio_attendance_app_flutter/resources/constants.dart';
 import 'package:orio_attendance_app_flutter/shared/widgets/text.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Hi extends StatefulWidget {
   const Hi({Key? key}) : super(key: key);
@@ -61,7 +63,7 @@ class _HiState extends State<Hi> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              MyText.h2('Hi, Ismail'),
+              MyText.h2('Hi, ${context.read<UserCubit>().state.user.name}'),
               const SizedBox(height: 5),
               MyText.body(greeting),
             ],
