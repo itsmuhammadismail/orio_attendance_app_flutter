@@ -18,6 +18,12 @@ jobs:
     - uses: subosito/flutter-action@v2
       with:
           channel: 'stable'
+          
+    - name: 'Create env file'
+      run: |
+          touch .env
+          echo HOST: ${{secrets.HOST}} >> .env
+          cat .env
     
    # Get flutter dependencies.
     - run: flutter pub get
