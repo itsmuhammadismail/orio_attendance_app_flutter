@@ -15,26 +15,6 @@ class _BodyState extends RouteAwareState<Body> {
   void start() async {
     List<Station> stations = context.read<StationCubit>().state.stations;
 
-    await Geolocator.getCurrentPosition(
-      desiredAccuracy: LocationAccuracy.high,
-    ).then((Position pos) {
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return Alert(
-            heading: 'Position',
-            body:
-                'lat: ${pos.latitude} ,long: ${pos.longitude}, radius: ${Geolocator.distanceBetween(
-              pos.latitude,
-              pos.longitude,
-              double.parse(stations[0].latitude),
-              double.parse(stations[0].longtitude),
-            )}',
-          );
-        },
-      );
-    }).catchError((e) {});
-
     while (isRoute) {
       Position? position;
       bool isFound = false;
