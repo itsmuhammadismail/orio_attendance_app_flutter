@@ -15,6 +15,7 @@ import 'package:orio_attendance_app_flutter/resources/constants.dart';
 import 'package:orio_attendance_app_flutter/shared/route_aware/route_aware.dart';
 import 'package:orio_attendance_app_flutter/shared/routes/navigate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:orio_attendance_app_flutter/shared/widgets/alert.dart';
 
 part 'widgets/body.dart';
 
