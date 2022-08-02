@@ -13,11 +13,11 @@ class _BodyState extends RouteAwareState<Body> {
   bool isInRange = false;
 
   void start() async {
-    bool isFound = false;
     List<Station> stations = context.read<StationCubit>().state.stations;
 
     while (isRoute) {
       Position? position;
+      bool isFound = false;
       await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high,
       ).then((Position pos) {
