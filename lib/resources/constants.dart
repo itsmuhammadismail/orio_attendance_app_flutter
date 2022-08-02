@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+const kHost = 'http://orio.digital:5000/';
+
 const kDefaultPadding = EdgeInsets.symmetric(horizontal: 20, vertical: 10);
 
 const kMonthNames = [

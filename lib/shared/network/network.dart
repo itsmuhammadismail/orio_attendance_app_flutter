@@ -1,6 +1,6 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:orio_attendance_app_flutter/resources/constants.dart';
 
 class NetworkHelper {
   static Future request({
@@ -14,7 +14,7 @@ class NetworkHelper {
     if (method == 'POST') {
       headers['Content-Type'] = 'application/json';
     }
-    var request = http.Request(method, Uri.parse('${dotenv.env['HOST']}$url'));
+    var request = http.Request(method, Uri.parse('$kHost$url'));
     request.body = jsonEncode(data);
     request.headers.addAll(headers);
     http.StreamedResponse response = await request.send();

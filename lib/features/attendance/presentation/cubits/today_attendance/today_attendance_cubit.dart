@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:orio_attendance_app_flutter/features/attendance/domain/entity/attendance_data_entity.dart';
 import 'package:orio_attendance_app_flutter/features/attendance/domain/usecase/today_attendance_usecase.dart';
 import 'package:orio_attendance_app_flutter/shared/error/failures.dart';
@@ -29,6 +30,18 @@ class TodayAttendanceCubit extends Cubit<TodayAttendanceState>
         ));
       },
     );
+  }
+
+  void checkSameDay() {
+    DateTime now = DateTime.now();
+    var formatter = DateFormat('yyyy-MM-dd');
+    String formattedDate = formatter.format(now);
+
+    if (state.attendanceData.date != formattedDate) {
+      emit(state.copyWith(
+        attendanceData: AttendanceData.initial(),
+      ));
+    }
   }
 
   void setToInitial() {

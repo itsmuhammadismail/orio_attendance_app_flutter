@@ -31,6 +31,7 @@ class _BodyState extends RouteAwareState<Body> {
           double.parse(station.latitude),
           double.parse(station.longtitude),
         );
+        print(distanceInMeters);
         if (distanceInMeters <= station.radius) {
           isFound = true;
         }

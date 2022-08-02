@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:orio_attendance_app_flutter/features/attendance/presentation/cubits/today_attendance/today_attendance_cubit.dart';
 import 'package:orio_attendance_app_flutter/shared/layout/layout.dart';
 import 'dart:async';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -15,7 +16,6 @@ import 'package:orio_attendance_app_flutter/resources/constants.dart';
 import 'package:orio_attendance_app_flutter/shared/route_aware/route_aware.dart';
 import 'package:orio_attendance_app_flutter/shared/routes/navigate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:orio_attendance_app_flutter/shared/widgets/alert.dart';
 
 part 'widgets/body.dart';
 
@@ -26,6 +26,10 @@ class AttendanceScreen extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    void checkSameDay() {
+      context.read<TodayAttendanceCubit>().checkSameDay();
+    }
+
     Future _determinePosition() async {
       LocationPermission permission;
       permission = await Geolocator.checkPermission();
@@ -43,6 +47,7 @@ class AttendanceScreen extends HookWidget {
     }
 
     useEffect(() {
+      checkSameDay();
       _determinePosition();
       return null;
     }, []);
